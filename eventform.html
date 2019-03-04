@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="eventformstyle.css">
+</head>
+<body>
+    <header>
+        <div class="header-top"></div>
+        <div class="header-bottom">
+            <h1>New event</h1>
+        </div>
+    </header>
+    <article>
+       <form id="formbody" onsubmit="finalValidation(event)">
+        <div class="aboutform">
+                <h2>About</h2>
+                <hr>
+                    <div class="row" style="padding-top: 20px;">
+                        <label class="rowitem" id="titlelabel" style="margin-right: 70px;">TITLE *</label>
+                        <input size="50" class="rowitem" id="formtitle" type= "text" name= "TITLE" maxlength="30" placeholder="Make it short and clear" required 
+                        oninvalid=" changeLabelcolor('titlelabel','red'); this.setCustomValidity('Title field cannot be empty');"  
+                        oninput=" changeLabelcolor('titlelabel','#6A5ACD'); this.setCustomValidity('')">
+                    </div>
+                    <div class="row" style="padding-top: 10px;">
+                        <label class="rowitem" id="descriptionlabel">DESCRIPTION *
+                        <textarea id="formdescription" name="text" rows="4" cols="70" wrap="soft" maxlength="140" placeholder="Write about your event, be creative" required oninvalid="changeLabelcolor('descriptionlabel','red'); this.setCustomValidity('Description field cannot be empty')" oninput=" changeLabelcolor('descriptionlabel','#6A5ACD'); this.setCustomValidity('')" onkeyup="countDescriptionCharacters(event)" ></textarea>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <p class="rowitem" style="margin-top:0px; padding-left: 363px; font-style: italic; color:gray;font-size: 70%;">Max length 140 characters </p>
+                        <p class="rowitem" style="margin-top:0px; padding-left: 315px; font-style: italic; color:gray;font-size: 70%;">0/140</p>
+                    </div>
+                    <div class="row">
+                        <label class="rowitem" style="margin-right:40px;">CATEGORY</label>
+                        <select class="rowitem" id="formcategory" name="CATEGORY">
+                            <option value="" disabled selected >Select category (skills,interests,locations)</option>
+                            <option value="0">Cycling</option>
+                            <option value="1">Hiking</option>
+                            <option value="2">Cooking</option>
+                            <option value="3">Rock climbing</option>
+                            <option value="4">Yoga</option>
+                            <option value="5">Fencing</option>
+                            <option value="6">Swimming</option>
+                            <option value="7">Badminton</option>
+                            <option value="8">Running</option>
+                            <option value="9">Dance</option>
+                        </select>
+                    </div>
+                    <p style="margin-top:5px; padding-left: 363px; font-style: italic; color:gray;font-size: 70%;">Describes topic and people who should be interested in this event </p>
+                    <div class="row">
+                        <label class="rowitem" style="margin-right:45px;">PAYMENT</label>
+                        <input class="rowitem" type="radio" name="event" value="Free event" checked onclick="hidePaymentInputifVisible()"> Free event
+                        <input class="rowitem" id="paidevent" type="radio" name="event" value="Paid event" onclick="showPaymentInput()"> Paid event 
+                    </div>
+                    <div class="row" style="padding-bottom:20px;">
+                        <label class="rowitem" style="margin-right:60px;">REWARD</label>
+                        <input size="3" class="rowitem" id="reward" type="text" name="REWARD" maxlength="9" placeholder="Number">
+                        <p class="rowitem">reward points for attendance</p>
+                    </div>
+        </div>
+         <div class="aboutform">
+                    <h2>Coordinator</h2>
+                    <hr>
+                        <div class="row" style="padding-top: 20px;">
+                            <label class="rowitem">RESPONSIBLE *</label>
+                            <select class="rowitem" id="formcordinator">
+                            <option value="0" selected>Walter Nelson</option>
+                            <option value="1">Daniel Mitchell</option>
+                            <option value="2">Albert Alexander</option>
+                            <option value="3">Philip Hugnes</option>
+                            <option value="4">Ashley Hernandez</option>
+                            <option value="5">Donna Washington</option>
+                            <option value="6">Andrew White</option>
+                            <option value="7">Sharon Allen</option>
+                            <option value="8">Russell Parker</option>
+                            <option value="9">Janet Stewart</option>
+                        </select>
+                        </div>
+                        <div class="row" style="padding-top: 10px;padding-bottom: 20px;">
+                            <label class="rowitem" id="emaillabel" style="margin-right:80px;">EMAIL</label>
+                            <input size="50" class="rowitem" id="formemail" type="email" name="emailaddress" placeholder="Email" 
+                            oninvalid=" changeLabelcolor('emaillabel','red');">
+                        </div>
+        </div>
+        <div class="aboutform">
+                        <h2>When</h2>
+                        <hr>
+                            <div class="row" style="padding-top: 20px;">
+                                <label class="rowitem" id="timelabel" style="margin-right:25px;">STARTS ON *</label>
+                                <input class="rowitem" id="formdate" type="date" name="DATA" required
+                                oninvalid=" changeLabelcolor('timelabel','red'); this.setCustomValidity('Date field cannot be empty')"
+                                  oninput=" this.setCustomValidity('')">
+                                <p class="rowitem">at</p>
+                                <input class="rowitem" id="formtime" type="time" name="TIME" required
+                                oninvalid=" changeLabelcolor('timelabel','red'); this.setCustomValidity('Time field cannot be empty')"  
+                                oninput=" this.setCustomValidity('')">
+                                <input class="rowitem" type="radio" name="eventtime" value="AM" checked> AM
+                                <input class="rowitem" id="pm" type="radio" name="eventtime" value="PM"> PM
+                            </div>
+                            <div class="row" style="padding-bottom: 20px;">
+                                <label class="rowitem" style="margin-right:45px;">DURATION</label>
+                                <input size="3" class="rowitem" id="duration" type="text" name="DURATION" maxlength="2" placeholder="Number">
+                                <p class="rowitem">hour</p>
+                            </div>
+        </div>
+        <div class="submitrow">
+            <input type="submit" value="PUBLISH EVENT">
+        </div>
+      </form>
+    </article>
+    <script>
+        let counter = 0;
+        function showPaymentInput(){
+            const paymentRow = document.querySelectorAll(".row")[4];
+
+            let paymentInput=document.createElement("input");
+            paymentInput.setAttribute('type', 'text');
+            paymentInput.setAttribute('class','rowitem');
+            paymentInput.setAttribute('id','payment');
+            paymentInput.setAttribute('size', '3');
+            paymentInput.setAttribute('name', 'PAYMENT');
+            paymentInput.setAttribute('maxlength', '9');
+            paymentInput.setAttribute('placeholder', 'Fee');
+            paymentInput.setAttribute('style', 'margin-left: 10px;');
+
+            let dolarSign = document.createElement("p");
+            dolarSign.setAttribute('class', 'rowitem');
+            dolarSign.setAttribute('style', 'margin-left: 5px;');
+            let sign = document.createTextNode('$');
+            dolarSign.appendChild(sign);
+
+            paymentRow.appendChild(paymentInput);
+            paymentRow.appendChild(dolarSign);
+        }
+
+        function hidePaymentInputifVisible(){
+            const paymentRow = document.querySelectorAll(".row")[4];
+            let counter = paymentRow.childElementCount;
+            if(counter === 5){
+                paymentRow.removeChild(paymentRow.lastChild);
+                paymentRow.removeChild(paymentRow.lastChild);
+            } 
+        }
+        function countDescriptionCharacters(event){
+            const key=event.key;
+            if((key === "Backspace")&&(counter > 0)){
+                counter--;
+            }
+            else{
+                if((key != "Backspace")&&(counter <= 140)){
+                    counter++;
+                }
+            }
+            let characterCounter = document.querySelectorAll("p")[1];
+            characterCounter.innerHTML = String(counter) + "/" + "140";
+        }
+        function finalValidation(event){
+            //validate data 
+            const dateInput = document.getElementById("formdate");
+            const actualdate = new Date();
+            const actualDay = actualdate.getDate();
+            const actualMonth = actualdate.getMonth()+1;
+            const actualYear = actualdate.getFullYear();
+
+            const actualdateText = actualYear + "-" + actualMonth + "-" + actualDay;
+            const dateInputText = dateInput.value;
+             
+            const dateInputtoDate = Date.parse(dateInputText);
+            const actualdatetoDate = Date.parse(actualdateText);
+
+            if(dateInputtoDate < actualdatetoDate){
+                alert("Event can't be created prior to actual date!");
+            }
+            else{
+                //validate time
+                const timeInput = document.getElementById("formtime");
+                const timeInputValue = timeInput.value;
+                let hours = timeInputValue.split(":")[0];
+                if((hours < 1)||(hours > 12)){
+                    alert("Time field should be in 12 hour format");
+                }
+                else{
+                    //validate email
+                    let ok = 1;
+                    const emailInputValue = document.getElementById("formemail").value;
+                    const coordinatorInput = document.getElementById("formcordinator");
+                    const coordinatornameValue = coordinatorInput.options[coordinatorInput.selectedIndex].innerHTML;
+                    if(emailInputValue != ""){
+                        if(coordinatornameValue === "Daniel Mitchell"){
+
+                            if(emailInputValue != "daniel.mitchell@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Albert Alexander"){
+                            if(emailInputValue != "albert.alexander@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Philip Hughes"){
+                            if(emailInputValue != "philip.hughes@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Walter Nelson"){
+                            if(emailInputValue != "walter.nelson@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Ashley Hernandez"){
+                            if(emailInputValue != "ashley.hernandez@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Donna Washington"){
+                            if(emailInputValue != "donna.washington@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Andrew White"){
+                            if(emailInputValue != "andrew.white@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Sharon Allen"){
+                            if(emailInputValue != "sharon.allen@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Russell Parker"){
+                            if(emailInputValue != "russell.parker@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                        if(coordinatornameValue === "Janet Stewart"){
+                            if(emailInputValue != "janet.stewart@hussa.rs"){
+                                alert("Email is incorrect for user");
+                                ok = 0;
+                            }
+                        }
+                    }
+                    if(ok === 1){
+                        //display form elements
+                        const textInput = document.getElementById("formtitle");
+                        const textInputValue = textInput.value;
+                        const descriptionInput = document.getElementById("formdescription");
+                        const descriptionInputValue = descriptionInput.value;
+                        const paidOption = document.getElementById("paidevent");
+                        const categorySelect = document.getElementById("formcategory");
+                        const categorySelectValue = categorySelect.value;
+
+                        let coordinatorid = coordinatorInput.value ;
+                        if(coordinatorid < 1){
+                            coordinatorid = 3;
+                        }
+                        else{
+                            if(coordinatorid <= 3){
+                                coordinatorid -- ;
+                            }
+                        }
+
+                        let paidoutput = "";
+                        let feeinput = "";
+                        if(paidOption.checked === true){
+                            paidoutput = "  paid_event: true,";
+                            feeinput = "  event_fee: "+ String(document.getElementById("payment").value) + ",";
+                        }
+                        else{
+                            paidoutput = "  paid_event: false,";
+                        }
+
+                        const rewardInput = document.getElementById("reward");
+                        let rewardoutput = "";
+                        if(rewardInput.value != ""){
+                            rewardoutput = "  reward: " + String(rewardInput.value) + ",";
+                        }
+                        const durationInput = document.getElementById("duration");
+                        let durationoutput = "";
+                        if(durationInput.value != ""){
+                            durationoutput = "  duration: " + String(durationInput.value*3600) + ",";
+                        }
+                        const pmOption = document.getElementById("pm");
+                        //change data to 24h format
+                        if(pmOption.checked === true){
+                            if(hours < 12){
+                                let numhours = parseInt(hours) + 12;
+                                hours = String(numhours);
+                            }
+                            else{
+                                hours = "00";
+                            }
+                        }
+                        const minutes = timeInputValue.split(":")[1];
+
+                        console.log("{");
+                        console.log("  title: " + textInputValue + ",");
+                        console.log("  description: " + descriptionInputValue + ",");
+                        if(categorySelectValue != ""){
+                            console.log("  category_id: "+ categorySelectValue + ",");
+                        }
+                        console.log(paidoutput);
+                        if(feeinput != ""){
+                            console.log(feeinput);
+                        }
+                        if(rewardoutput != ""){
+                            console.log(rewardoutput);
+                        }
+                        console.log("  date: " + dateInputText + "T" + hours + ":" + minutes + ",");
+                        if(durationoutput != ""){
+                            console.log(durationoutput);
+                        }
+                        console.log("  coordiantor: {");
+                        if(emailInputValue != ""){
+                            console.log("    email: " + emailInputValue + ",");
+                        }
+                        console.log("    id: " + coordinatorid + ",");
+                        console.log("  },")
+                        console.log("}");
+                        // close filled form and show success information
+                        document.getElementById("formbody").outerHTML = "";
+
+                        let successinfo = document.createElement("div");
+                        successinfo.setAttribute('class', 'successcontainer');
+                        let successinfoheader = document.createElement("h2");
+                        let headertext = document.createTextNode("Success");
+                        let successinfoparagraph = document.createElement("p");
+                        let paragraphtext = document.createTextNode("Event has been created.");
+                        successinfoheader.appendChild(headertext);
+                        successinfoparagraph.appendChild(paragraphtext);
+                        successinfo.appendChild(successinfoheader);
+                        successinfo.appendChild(successinfoparagraph);
+
+                        document.body.appendChild(successinfo);
+                    }
+                }
+            }
+        }
+        function changeLabelcolor(id,color){
+            let titleLabel = document.getElementById(id);
+            titleLabel.style.color = color;
+        }
+    </script>
+</body>
