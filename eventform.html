@@ -49,7 +49,7 @@
                     </div>
                     <p style="margin-top:5px; padding-left: 363px; font-style: italic; color:gray;font-size: 70%;">Describes topic and people who should be interested in this event </p>
                     <div class="row">
-                        <label class="rowitem" style="margin-right:45px;">PAYMENT</label>
+                        <label class="rowitem" id="paymentlabel" style="margin-right:45px;">PAYMENT</label>
                         <input class="rowitem" type="radio" name="event" value="Free event" checked onclick="hidePaymentInputifVisible()"> Free event
                         <input class="rowitem" id="paidevent" type="radio" name="event" value="Paid event" onclick="showPaymentInput()"> Paid event 
                     </div>
@@ -80,7 +80,8 @@
                         <div class="row" style="padding-top: 10px;padding-bottom: 20px;">
                             <label class="rowitem" id="emaillabel" style="margin-right:80px;">EMAIL</label>
                             <input size="50" class="rowitem" id="formemail" type="email" name="emailaddress" placeholder="Email" 
-                            oninvalid=" changeLabelcolor('emaillabel','red');">
+                            oninvalid=" changeLabelcolor('emaillabel','red'); this.setCustomValidity('Please provide valid email adress');"
+                            oninput="this.setCustomValidity('')">
                         </div>
         </div>
         <div class="aboutform">
@@ -123,6 +124,9 @@
             paymentInput.setAttribute('maxlength', '9');
             paymentInput.setAttribute('placeholder', 'Fee');
             paymentInput.setAttribute('style', 'margin-left: 10px;');
+            paymentInput.required = true;
+            paymentInput.setAttribute('oninvalid',"changeLabelcolor('paymentlabel','red'); this.setCustomValidity('fee input cannot be empty');");
+            paymentInput.setAttribute('oninput',"changeLabelcolor('paymentlabel','#6A5ACD'); this.setCustomValidity('')" );
 
             let dolarSign = document.createElement("p");
             dolarSign.setAttribute('class', 'rowitem');
@@ -143,7 +147,7 @@
             } 
         }
         function countDescriptionCharacters(event){
-            const key=event.key;
+            const key = event.key;
             if((key === "Backspace")&&(counter > 0)){
                 counter--;
             }
